@@ -144,6 +144,28 @@ void Eliminar(Nodo*& raiz, int datoNodoEliminar)
 	}
 }
 
+void mostrarArbol(Nodo* arbol, int nivel)
+{
+    if (arbol == NULL)
+    {
+        return;
+    }
+
+    // Primero mostramos la derecha
+    mostrarArbol(arbol->derecha, nivel + 1);
+
+    // Dejamos espacios dependiendo del nivel
+    for (int i = 0; i < nivel; i++)
+    {
+        cout << "    ";
+    }
+
+    cout << arbol->dato << endl;
+
+    // Después mostramos la izquierda
+    mostrarArbol(arbol->izquierda, nivel + 1);
+}
+
 int main()
 {
 	Nodo* raiz = NULL;
