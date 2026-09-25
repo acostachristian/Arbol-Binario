@@ -144,6 +144,24 @@ void Eliminar(Nodo*& raiz, int datoNodoEliminar)
 	}
 }
 
+void Mostrar(Nodo* raiz, int nivel)
+{
+	if (raiz == NULL)
+	{
+		return;
+	}
+
+	Mostrar(raiz->derecha, nivel + 1);
+
+	for (int i = 0; i < nivel; i++)
+	{
+		cout << "\t";
+	}
+
+	cout << raiz->dato << endl;
+	Mostrar(raiz->izquierda, nivel + 1);
+}
+
 int main()
 {
   return 0;
