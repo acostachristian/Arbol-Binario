@@ -90,11 +90,14 @@ void ElimNodoCon1o0Hijos(Nodo* nodoAEliminar, Nodo* nodoPadre, Nodo*& raiz)
 	delete nodoAEliminar;
 }
 
-void ElimNodoCon2Hijos(Nodo* nodoAEliminar, Nodo*& raiz) //|||SOLO USAR SI EL NodoAEliminar TIENE HIJOS|||
+void ElimNodoConHijos(Nodo* nodoAEliminar, Nodo*& raiz) //|||SOLO USAR SI EL NodoAEliminar TIENE HIJOS|||
 {
 	Nodo* nodoPadreDeReemplazo = nodoAEliminar;
-	Nodo* nodoReemplazo = nodoAEliminar->derecha;
-	if (nodoReemplazo->izquierda != NULL) {
+	Nodo* nodoReemplazo;
+
+	if (nodoAEliminar->derecha != NULL) {
+		// Caso 1: buscar el minimo en el subarbol derecho
+		nodoReemplazo = nodoAEliminar->derecha;
 		while (nodoReemplazo->izquierda != NULL)
 		{
 			nodoPadreDeReemplazo = nodoReemplazo;
@@ -102,6 +105,7 @@ void ElimNodoCon2Hijos(Nodo* nodoAEliminar, Nodo*& raiz) //|||SOLO USAR SI EL No
 		}
 	}
 	else {
+		// Caso 2: no hay derecha, buscar el maximo en el subarbol izquierdo
 		nodoReemplazo = nodoAEliminar->izquierda;
 		while (nodoReemplazo->derecha != NULL)
 		{
@@ -134,13 +138,11 @@ void Eliminar(Nodo*& raiz, int datoNodoEliminar)
 		cout << "El nodo de valor " << datoNodoEliminar << " no existe\n"; 
 		return;
 	}
-	if (nodoActual->izquierda != NULL && nodoActual->derecha != NULL)
-	{
-		ElimNodoCon2Hijos(nodoActual, raiz);
-	}
-	else
-	{
+	if (nodoActual->izquierda == NULL && nodoActual->derecha == NULL) {
 		ElimNodoCon1o0Hijos(nodoActual, nodoPadre, raiz);
+	}
+	else {
+		ElimNodoConHijos(nodoActual, raiz);
 	}
 	cout << "\nEl nodo de valor " << datoNodoEliminar << " fue eliminado.\n";
 }
