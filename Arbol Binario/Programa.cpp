@@ -167,6 +167,41 @@ void MostrarArbol(Nodo* nodoActual, int nivel)
     MostrarArbol(nodoActual->izquierda, nivel + 1);
 }
 
+// Pide un entero por consola y NO deja continuar hasta que el usuario escriba
+// un numero entero valido (sin letras en ninguna parte de la entrada).
+// pDato se pasa por referencia para devolver el valor ya validado.
+void leerEntero(string mensaje, int& pDato)
+{
+	string datoString;
+	size_t position;
+	bool error;
+
+	do
+	{
+		try
+		{
+			cout << mensaje;
+			cin >> datoString;
+			pDato = stoi(datoString, &position);
+
+			if (datoString.length() != position)
+			{
+				error = true;
+				cout << "Entrada invalida, ingrese un numero entero\n" << endl;
+			}
+			else
+			{
+				error = false;
+			}
+		}
+		catch (const exception&)
+		{
+			error = true;
+			cout << "Entrada invalida, ingrese un numero entero\n" << endl;
+		}
+	} while (error);
+}
+
 int main()
 {
 	Nodo* raiz = NULL;
@@ -175,7 +210,7 @@ int main()
 
 	do
 	{
-		system("cls"); 
+		system("cls");
 
 		cout << "------------------------------\n";
 		cout << "MENU ARBOL BINARIO DE BUSQUEDA\n\n";
@@ -185,8 +220,7 @@ int main()
 		cout << "4. Eliminar \n";
 		cout << "5. Salir \n\n";
 
-		cout << "Seleccione una opcion: ";
-		cin >> opcion;
+		leerEntero("Seleccione una opcion: ", opcion);
 
 		switch (opcion)
 		{
@@ -202,8 +236,7 @@ int main()
 			}
 			break;
 		case 2:
-			cout << "Ingrese el dato a insertar: ";
-			cin >> valor;
+			leerEntero("Ingrese el dato a insertar: ", valor);
 			Insertar(raiz, valor);
 			break;
 
@@ -214,8 +247,7 @@ int main()
 			}
 			else
 			{
-				cout << "Ingrese el dato a buscar: ";
-				cin >> valor;
+				leerEntero("Ingrese el dato a buscar: ", valor);
 				Buscar(raiz, valor);
 			}
 			break;
@@ -227,8 +259,7 @@ int main()
 			}
 			else
 			{
-				cout << "Ingrese el dato a eliminar: ";
-				cin >> valor;
+				leerEntero("Ingrese el dato a eliminar: ", valor);
 				Eliminar(raiz, valor);
 			}
 			break;
@@ -246,7 +277,7 @@ int main()
 		{
 			cout << "\nPresione cualquier tecla para continuar...";
 			cin.ignore(numeric_limits<streamsize>::max(), '\n'); // limpia el buffer
-			cin.get(); 
+			cin.get();
 		}
 
 	} while (opcion != 5);
