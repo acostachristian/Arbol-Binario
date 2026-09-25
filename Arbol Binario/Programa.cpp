@@ -146,5 +146,75 @@ void Eliminar(Nodo*& raiz, int datoNodoEliminar)
 
 int main()
 {
-  return 0;
+	Nodo* raiz = NULL;
+	int opcion;
+	int valor;
+
+	do
+	{
+		system("cls"); 
+
+		cout << "\n------------------------------\n";
+		cout << "\nMENU ARBOL BINARIO DE BUSQUEDA\n";
+		cout << "1. Insertar \n";
+		cout << "2. Buscar \n";
+		cout << "3. Eliminar \n";
+		cout << "4. Salir \n";
+
+		cout << "Seleccione una opcion: ";
+		cin >> opcion;
+
+		switch (opcion)
+		{
+		case 1:
+			cout << "Ingrese el dato a insertar: ";
+			cin >> valor;
+			Insertar(raiz, valor);
+			break;
+
+		case 2:
+			if (raiz == NULL)
+			{
+				cout << "\nArbol vacio.\n";
+			}
+			else
+			{
+				cout << "Ingrese el dato a buscar: ";
+				cin >> valor;
+				Buscar(raiz, valor);
+			}
+			break;
+
+		case 3:
+			if (raiz == NULL)
+			{
+				cout << "\nArbol vacio.\n";
+			}
+			else
+			{
+				cout << "Ingrese el dato a eliminar: ";
+				cin >> valor;
+				Eliminar(raiz, valor);
+			}
+			break;
+
+		case 4:
+			cout << "Saliendo del programa...\n";
+			break;
+
+		default:
+			cout << "Opcion invalida. Intente de nuevo.\n";
+			break;
+		}
+
+		if (opcion != 4)
+		{
+			cout << "\nPresione cualquier tecla para continuar...";
+			cin.ignore(numeric_limits<streamsize>::max(), '\n'); // limpia el buffer
+			cin.get(); 
+		}
+
+	} while (opcion != 4);
+
+	return 0;
 }
