@@ -10,22 +10,22 @@ struct Nodo {
 	Nodo* derecha;
 };
 
-void Insertar(Nodo*& raiz, int valor)
+void Insertar(Nodo*& nodoActual, int valor) //Al inicio, nodoActual es la raiz
 {
-	if (raiz == NULL) { //Si el arbol (o subarbol) esta vacio, aqui va el nuevo nodo
+	if (nodoActual == NULL) { //Si el arbol (o subarbol) esta vacio, aqui va el nuevo nodo
 		Nodo* nuevoNodo = new Nodo;
 		nuevoNodo->dato = valor;
 		nuevoNodo->izquierda = NULL;
 		nuevoNodo->derecha = NULL;
-		raiz = nuevoNodo;
+		nodoActual = nuevoNodo;
 		cout << "El nodo de valor " << valor << " se inserto correctamente en el arbol\n";
 		return;
 	}
-	if (valor > raiz->dato) { //Si el valor es mayor que el nodo actual, va al subarbol derecho
-		Insertar(raiz->derecha, valor);
+	if (valor > nodoActual->dato) { //Si el valor es mayor que el nodo actual, va al subarbol derecho
+		Insertar(nodoActual->derecha, valor);
 	}
-	else if (valor < raiz->dato) { //Si el valor es menor que el nodo actual, va al subarbol izquierdo
-		Insertar(raiz->izquierda, valor);
+	else if (valor < nodoActual->dato) { //Si el valor es menor que el nodo actual, va al subarbol izquierdo
+		Insertar(nodoActual->izquierda, valor);
 	}
 	else {
 		cout << "El nodo de valor " << valor << " ya existe en el arbol\n";
@@ -145,15 +145,15 @@ void Eliminar(Nodo*& raiz, int datoNodoEliminar)
 	}
 }
 
-void mostrarArbol(Nodo* arbol, int nivel)
+void MostrarArbol(Nodo* nodoActual, int nivel)
 {
-    if (arbol == NULL)
+    if (nodoActual == NULL)
     {
         return;
     }
 
     // Primero mostramos la derecha
-    mostrarArbol(arbol->derecha, nivel + 1);
+    MostrarArbol(nodoActual->derecha, nivel + 1);
 
     // Dejamos espacios dependiendo del nivel
     for (int i = 0; i < nivel; i++)
@@ -161,10 +161,10 @@ void mostrarArbol(Nodo* arbol, int nivel)
         cout << "    ";
     }
 
-    cout << arbol->dato << endl;
+    cout << nodoActual->dato << endl;
 
     // Después mostramos la izquierda
-    mostrarArbol(arbol->izquierda, nivel + 1);
+    MostrarArbol(nodoActual->izquierda, nivel + 1);
 }
 
 int main()
@@ -191,6 +191,15 @@ int main()
 		switch (opcion)
 		{
 		case 1:
+			if (raiz == NULL)
+			{
+				cout << "\nArbol vacio.\n";
+			}
+			else
+			{
+				cout << "\n";
+				MostrarArbol(raiz, 0);
+			}
 			break;
 		case 2:
 			cout << "Ingrese el dato a insertar: ";
