@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <limits>
 
 using namespace std;
 
@@ -176,12 +177,13 @@ int main()
 	{
 		system("cls"); 
 
-		cout << "\n------------------------------\n";
-		cout << "\nMENU ARBOL BINARIO DE BUSQUEDA\n";
-		cout << "1. Insertar \n";
-		cout << "2. Buscar \n";
-		cout << "3. Eliminar \n";
-		cout << "4. Salir \n";
+		cout << "------------------------------\n";
+		cout << "MENU ARBOL BINARIO DE BUSQUEDA\n\n";
+		cout << "1. Mostrar arbol\n";
+		cout << "2. Insertar \n";
+		cout << "3. Buscar \n";
+		cout << "4. Eliminar \n";
+		cout << "5. Salir \n\n";
 
 		cout << "Seleccione una opcion: ";
 		cin >> opcion;
@@ -189,12 +191,14 @@ int main()
 		switch (opcion)
 		{
 		case 1:
+			break;
+		case 2:
 			cout << "Ingrese el dato a insertar: ";
 			cin >> valor;
 			Insertar(raiz, valor);
 			break;
 
-		case 2:
+		case 3:
 			if (raiz == NULL)
 			{
 				cout << "\nArbol vacio.\n";
@@ -207,7 +211,7 @@ int main()
 			}
 			break;
 
-		case 3:
+		case 4:
 			if (raiz == NULL)
 			{
 				cout << "\nArbol vacio.\n";
@@ -220,7 +224,7 @@ int main()
 			}
 			break;
 
-		case 4:
+		case 5:
 			cout << "Saliendo del programa...\n";
 			break;
 
@@ -229,14 +233,14 @@ int main()
 			break;
 		}
 
-		if (opcion != 4)
+		if (opcion != 5)
 		{
 			cout << "\nPresione cualquier tecla para continuar...";
 			cin.ignore(numeric_limits<streamsize>::max(), '\n'); // limpia el buffer
 			cin.get(); 
 		}
 
-	} while (opcion != 4);
+	} while (opcion != 5);
 
 	return 0;
 }
