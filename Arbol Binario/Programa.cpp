@@ -168,6 +168,35 @@ void MostrarArbol(Nodo* nodoActual, int nivel)
     // Después mostramos la izquierda
     MostrarArbol(nodoActual->izquierda, nivel + 1);
 }
+void MostrarInOrden(Nodo* nodoActual)
+{
+	if (nodoActual == NULL) {
+		return;
+	}
+	MostrarInOrden(nodoActual->izquierda);
+	cout << nodoActual->dato << " ";
+	MostrarInOrden(nodoActual->derecha);
+}
+
+void MostrarPreOrden(Nodo* nodoActual)
+{
+	if (nodoActual == NULL) {
+		return;
+	}
+	cout << nodoActual->dato << " ";
+	MostrarPreOrden(nodoActual->izquierda);
+	MostrarPreOrden(nodoActual->derecha);
+}
+
+void MostrarPostOrden(Nodo* nodoActual)
+{
+	if (nodoActual == NULL) {
+		return;
+	}
+	MostrarPostOrden(nodoActual->izquierda);
+	MostrarPostOrden(nodoActual->derecha);
+	cout << nodoActual->dato << " ";
+}
 
 // Pide un entero por consola y NO deja continuar hasta que el usuario escriba
 // un numero entero valido (sin letras en ninguna parte de la entrada).
@@ -233,8 +262,32 @@ int main()
 			}
 			else
 			{
+				int opcionRecorrido;
+				cout << "\n1. InOrden\n2. PreOrden\n3. PostOrden\n4. Vista Identada\n";
+				leerEntero("Seleccione un recorrido: ", opcionRecorrido);
+
 				cout << "\n";
-				MostrarArbol(raiz, 0);
+				switch (opcionRecorrido)
+				{
+				case 1:
+					MostrarInOrden(raiz);
+					cout << endl;
+					break;
+				case 2:
+					MostrarPreOrden(raiz);
+					cout << endl;
+					break;
+				case 3:
+					MostrarPostOrden(raiz);
+					cout << endl;
+					break;
+				case 4:
+					MostrarArbol(raiz, 0);
+					break;
+				default:
+					cout << "Opcion invalida.\n";
+					break;
+				}
 			}
 			break;
 		case 2:
