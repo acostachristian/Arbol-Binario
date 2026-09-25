@@ -87,7 +87,6 @@ void ElimNodoCon1o0Hijos(Nodo* nodoAEliminar, Nodo* nodoPadre, Nodo*& raiz)
 			nodoPadre->derecha = nodoReemplazo;
 		}
 	}
-	
 	delete nodoAEliminar;
 }
 
@@ -143,6 +142,7 @@ void Eliminar(Nodo*& raiz, int datoNodoEliminar)
 	{
 		ElimNodoCon1o0Hijos(nodoActual, nodoPadre, raiz);
 	}
+	cout << "\nEl nodo de valor " << datoNodoEliminar << " fue eliminado.\n";
 }
 
 void MostrarArbol(Nodo* nodoActual, int nivel)
